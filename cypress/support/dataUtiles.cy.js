@@ -1,21 +1,19 @@
-
+import employeeApi from "./utils/api/pim/employee/employeeApi.cy";
+import { employeeFactory } from "./utils/factories/pim/employee/employeeFactory.cy";
 
 class dataUtiles{
 
-    addEmployee(fname ,lname ,eId){
-
-        return cy.request("POST" , '/api/v2/pim/employees',{
-                "firstName":fname,
-                "middleName":"",
-                "lastName":lname,
-                "empPicture":null,
-                "employeeId":`${eId}`,
-                // failOnStatusCode: false
-        },
-        
-    )
-        
-        
+    addEmployee(data={},length=1){
+        const arr=[];
+        for(let i=1;i<=length ;i++){
+             employeeApi.addEmployee(
+                                employeeFactory.createEmployee(data))
+                     .then((response)=>{
+            arr.push( response.body.data);
+        })                 
+        }
+        console.log("arr = ",cy.wrap(arr));
+         return arr
     }
 
 }
