@@ -29,7 +29,9 @@ import loginActions from "../pageObjects/login/Actions.cy";
 const loginactions = new loginActions();
 Cypress.Commands.add('loginToOrangeHRM',(username , password)=>{
     cy.visit("/auth/login");
+    cy.url().should('include', '/auth/login');
     loginactions.typeInUserName(username);
     loginactions.typeInPassword(password);
     loginactions.clickOnLoginButton();
+    cy.url().should('include', '/dashboard/index');
 });

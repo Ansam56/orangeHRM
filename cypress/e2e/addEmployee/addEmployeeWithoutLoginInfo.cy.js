@@ -68,13 +68,13 @@ describe('Check Add a New Employee Functionality without adding a login details'
         });
         it("validate that the admin can't able to add new employee with existing employee id and valid first name , last name" , ()=>{
         
-        //  cy.get('@employee').then((employee) => {
+
     addEmployeeactions.typeInFirstNameInput('ahmad');
     addEmployeeactions.typeInLastNameInput('ahmad');
     addEmployeeactions.typeInEmployeeId(employee[0].employeeId);
     addEmployeeactions.clickOnSaveButton();
     addEmployeeassertions.checkIfEmployeeIdErrorMessageIsExist();
-//   });
+
     })
     });
     

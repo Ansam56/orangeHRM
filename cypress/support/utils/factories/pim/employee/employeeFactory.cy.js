@@ -12,4 +12,14 @@ export class employeeFactory{
             empPicture :null 
         }
     }
+
+    static addLoginDetails({empNumber,password,status,userRoleId,username}={}){
+        return{
+            empNumber :empNumber,
+            password : password || faker.internet.password(),
+            status : true ,
+            userRoleId :2,
+            username : username || faker.internet.username()
+        }
+    }
 }

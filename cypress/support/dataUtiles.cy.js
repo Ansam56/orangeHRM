@@ -9,11 +9,29 @@ class dataUtiles{
              employeeApi.addEmployee(
                                 employeeFactory.createEmployee(data))
                      .then((response)=>{
-            arr.push( response.body.data);
-        })                 
+             arr.push( response.body.data);
+        })    
+                
         }
-        console.log("arr = ",cy.wrap(arr));
-         return arr
+         return cy.wrap(arr);
+
+
+    }
+
+    addLoginDetails(data={}){
+        return cy.then(()=>{
+            return employeeApi.addLoginDetails(
+                    data
+        )
+        .then((response)=>{
+            return response.body.data;
+        })
+        })
+        
+    }
+
+    deleteEmployees(data){
+        return employeeApi.deleteEmployees(data);
     }
 
 }
