@@ -3,7 +3,6 @@
 import addEntitlementsActions from "../../../pageObjects/leave/addEntitlements/Actions.cy";
 import entitlementActions from "../../../pageObjects/leave/entitlements/Actions.cy";
 import entitlementAssertions from "../../../pageObjects/leave/entitlements/Assertions.cy";
-import logoutActions from "../../../pageObjects/logout/Actions.cy";
 import sharedActions from "../../../pageObjects/shared/Actions.cy";
 import dataUtiles from "../../../support/dataUtiles.cy";
 import { employeeFactory } from "../../../support/utils/factories/pim/employee/employeeFactory.cy";
@@ -11,42 +10,43 @@ import { employeeFactory } from "../../../support/utils/factories/pim/employee/e
 const datautiles = new dataUtiles();
 const sharedactions = new sharedActions();
 const addEntitlementsactions = new addEntitlementsActions();
-const logoutactions = new logoutActions();
+
 const entitlementactions = new entitlementActions();
 const entitlementassertions = new entitlementAssertions();
-const leaveType ='Kobbers Leave Type';
+const leaveType ='CAN - Vacation';
 const leaveDays = '14';
 describe('Check Adding Leave Entitlement Functionality', () => {
     let employees =[];
+    let loginDetails =[];
+    let users=[];
     
-    before(()=>{
-        cy.loginToOrangeHRM("Admin",'admin123');
-          datautiles.addEmployee({},1).then((emps)=>{
-            employees=emps;
-            cy.url().should('include', '/dashboard/index');
-            // logoutactions.clickOnLogoutMenu()
-            //              .clickOnLogoutOption();
-            
+ before(() => {
+  cy.loginToOrangeHRM("Admin", "admin123");
 
-        })
-        cy.wait(2000)
-    })
 
-     beforeEach(()=>{
-        cy.visit('/');
-        logoutactions.clickOnLogoutMenu()
-                         .clickOnLogoutOption();
-        cy.wait(2000);
-        cy.loginToOrangeHRM("Admin",'admin123');
-    })
+  datautiles.addEmployee({}, 3).then((emps) => {
+    employees = emps;
 
-   
+
+    employees.forEach((emp) => {
+        const user = employeeFactory.addLoginDetails({ empNumber: emp.empNumber });
+       loginDetails .push(user );
+
+      datautiles.addLoginDetails(user).then((response) => {
+        users.push(response);
+      });
+    });
+  });
+
+console.log("users : ",users);
+
+});
+
+
 
     it('validate that the admin can add leave entitlement for a number of employees',()=>{
-      
-  
+            
         for(let i=0;i<employees.length;i++){ 
-
              sharedactions.clickOnLeaveMenuItem()
                      .clickOnEntitlementsLinkInNavbar()
                      .clickOnAddEntitlementsLink();
@@ -62,46 +62,36 @@ describe('Check Adding Leave Entitlement Functionality', () => {
         
         
         }
-    })
+        cy.logout();
+  });
+
 
   
 
         it('Verify that the Leave Entitlement is added for employee',()=>{
-            for(let i=0;i<employees.length;i++){
-                 const {firstName ,middleName , lastName ,empNumber } = employees[i];
-                cy.url().should('include', '/dashboard/index');
-                const loginDetails = employeeFactory.addLoginDetails({empNumber:empNumber});
-                datautiles.addLoginDetails(loginDetails)
-                          .then((user)=>{
-                            
-                    console.log("user : ",user)
-                    logoutactions.clickOnLogoutMenu()
-                                 .clickOnLogoutOption();
+            for(let i=0;i<users.length;i++){
 
-                                 cy.wait(2000);
-
-                 cy.loginToOrangeHRM(`${user.userName}`,`${loginDetails.password}`);
+                 cy.loginToOrangeHRM(users[i].userName,loginDetails[i].password);
                  cy.url().should('include', '/dashboard/index');
                     sharedactions.clickOnLeaveMenuItem()
-                    .clickOnEntitlementsLinkInNavbar();
+                    .clickOnEntitlementsLinkInNavbar(); 
                     entitlementactions.clickOnMyEntitlementOption();
                     entitlementassertions.verifyThatLeaveTypeIsAppeare(leaveType)
                                          .verifyThatLeaveDaysIsAppeare(leaveDays);
 
-                });
-
+                cy.logout();
             }
+            
     })
 
    after(()=>{
     cy.loginToOrangeHRM('Admin', 'admin123');
     console.log(employees);
-       const empIds = employees.map((emp)=>{
-        return parseInt(emp.employeeId);
+       const empIds = loginDetails.map((emp)=>{
+        return parseInt(emp.empNumber);
        })
-        datautiles.deleteEmployees(empIds);
+        return datautiles.deleteEmployees(empIds);
    })
     
     
-
 });

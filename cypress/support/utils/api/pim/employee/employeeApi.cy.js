@@ -17,8 +17,11 @@ export default class employeeApi{
 
      static deleteEmployees(empIds){
         return cy.request("DELETE","/api/v2/pim/employees",{
-             ids: empIds 
+            ids:empIds,
         })
     }
 
+
+
 }
+

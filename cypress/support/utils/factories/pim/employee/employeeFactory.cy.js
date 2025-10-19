@@ -16,10 +16,12 @@ export class employeeFactory{
     static addLoginDetails({empNumber,password,status,userRoleId,username}={}){
         return{
             empNumber :empNumber,
-            password : password || faker.internet.password(),
+            password : password || faker.internet.password({length: 10 , pattern: /[A-Z][a-z]{1,}[0-9]{1,}]/ }),
             status : true ,
             userRoleId :2,
             username : username || faker.internet.username()
         }
     }
+
+    
 }

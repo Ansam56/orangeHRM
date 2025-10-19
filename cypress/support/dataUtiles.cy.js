@@ -1,4 +1,6 @@
+import entitlementApi from "./utils/api/leave/entitlement/entitlementApi.cy";
 import employeeApi from "./utils/api/pim/employee/employeeApi.cy";
+import entitlementFactory from "./utils/factories/leave/entitlement/entitlementFactory.cy";
 import { employeeFactory } from "./utils/factories/pim/employee/employeeFactory.cy";
 
 class dataUtiles{
@@ -32,6 +34,14 @@ class dataUtiles{
 
     deleteEmployees(data){
         return employeeApi.deleteEmployees(data);
+    }
+
+    addLeaveEntitlemet(data={}){
+        return cy.then(()=>{
+            return entitlementApi.addLeaveEntitlement(
+                entitlementFactory.addLeaveEntitlemet(data)
+            );
+        })
     }
 
 }

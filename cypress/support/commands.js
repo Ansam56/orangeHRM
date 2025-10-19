@@ -25,8 +25,10 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import loginActions from "../pageObjects/login/Actions.cy";
+import logoutActions from "../pageObjects/logout/Actions.cy";
 
 const loginactions = new loginActions();
+const logoutactions = new logoutActions();
 Cypress.Commands.add('loginToOrangeHRM',(username , password)=>{
     cy.visit("/auth/login");
     cy.url().should('include', '/auth/login');
@@ -35,3 +37,13 @@ Cypress.Commands.add('loginToOrangeHRM',(username , password)=>{
     loginactions.clickOnLoginButton();
     cy.url().should('include', '/dashboard/index');
 });
+
+Cypress.Commands.add('logout',()=>{
+    // cy.visit('/dashboard/index');
+    // cy.url().should('include', '/dashboard/index', { timeout: 10000 });
+    logoutactions.clickOnLogoutMenu();
+    logoutactions.clickOnLogoutOption();
+//     cy.wait(2000);
+//     cy.visit('/auth/login');
+// cy.url().should('include', '/auth/login');
+})
