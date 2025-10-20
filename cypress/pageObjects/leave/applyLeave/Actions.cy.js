@@ -28,15 +28,18 @@ export default class applyLeaveActions{
 
     typeInFromDate(){
         cy.contains('div','From Date').parent()
-          .find('input').clear()
-          .type(formattedDate);
+          .find('i').click();
+          
         return this;
+    }
+    selectToday(){
+      cy.get('.--today').first().click();
+      return this;
     }
 
     typeInToDate(){
         cy.contains('div','To Date').parent()
-          .find('input').clear()
-          .type(formattedDate);
+          .find('i').click();
         return this;
     }
 

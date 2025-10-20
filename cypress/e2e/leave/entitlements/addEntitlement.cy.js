@@ -24,7 +24,7 @@ describe('Check Adding Leave Entitlement Functionality', () => {
   cy.loginToOrangeHRM("Admin", "admin123");
 
 
-  datautiles.addEmployee({}, 3).then((emps) => {
+  datautiles.addEmployee({}, 5).then((emps) => {
     employees = emps;
 
 

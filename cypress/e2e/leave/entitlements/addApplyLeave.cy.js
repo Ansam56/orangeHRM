@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+import addEmployeeAssertions from "../../../pageObjects/AddEmployee/Assertions.cy";
 import applyLeaveActions from "../../../pageObjects/leave/applyLeave/Actions.cy";
 import leaveListActions from "../../../pageObjects/leave/leaveList/Actions.cy";
 import sharedActions from "../../../pageObjects/shared/Actions.cy";
@@ -10,6 +11,7 @@ const datautiles = new dataUtiles();
 const sharedactions = new sharedActions();
 const applyLeaveAction = new applyLeaveActions();
 const leaveListAction = new leaveListActions();
+const addEmployeeassertions = new addEmployeeAssertions();
 
 describe('Check Accept Leave Entitlement Functionality', () => {
     let employees =[];
@@ -17,33 +19,37 @@ describe('Check Accept Leave Entitlement Functionality', () => {
     let users=[];
     
 before(() => {
-   cy.loginToOrangeHRM("Admin", "admin123");
+  cy.loginToOrangeHRM("Admin", "admin123");
 
-      datautiles.addEmployee({}, 3).then((emps)=>{
-        employees=emps;
-
-
-        employees.forEach((emp)=>{
-
-      
-      const user = employeeFactory.addLoginDetails({ empNumber: emp.empNumber });
-            loginDetails.push(user);
-
-            datautiles.addLoginDetails(user).then((loginedUser)=>{
-              users.push(loginedUser);
-              datautiles.addLeaveEntitlemet({empNumber: emp.empNumber ,leaveTypeId :6 }).then(()=>{
-                cy.logout();
-              });
-            });
-          });
-      })
-
+  datautiles.addEmployee({}, 5).then((emps) => {
+    employees = emps;
+  }).then(()=>{
+   for( let i=0;i<employees.length;i++) {
+      cy.then(()=>{
 
       
-          });
+      const user = employeeFactory.addLoginDetails({ empNumber: employees[i].empNumber });
+      loginDetails.push(user);
+
+      return datautiles.addLoginDetails(user).then((loginedUser) => {
+        users.push(loginedUser);
+
+        return datautiles.addLeaveEntitlemet({
+          empNumber: employees[i].empNumber,
+          leaveTypeId: 6,
+        });
+      });
+      });
+    }
+  }).then(() => {
+      cy.logout();
+    });
+  });
 
     it('validate that the employee can apply for his leave',()=>{
-            
+          
+
+         
         for(let i=0;i<employees.length;i++){ 
 
             cy.loginToOrangeHRM(users[i].userName,loginDetails[i].password);
@@ -52,34 +58,38 @@ before(() => {
                             .clickOnLeaveType()
                             .selectFirstLeave()
                             .typeInFromDate()
-                            .typeInToDate()
+                            .selectToday()
+                            // .typeInToDate()
+                            // .selectToday()
                             .clickOnApplyButton();
+            addEmployeeassertions.checkIfSuccessAlertIsApeare();
 
         
         cy.logout();
         }
-        
+         
   });
 
 
   
 
         it('Validate that the admin can accept the employee leave',()=>{
-            for(let i=0;i<users.length;i++){
+                cy.loginToOrangeHRM('Admin' , 'admin123');
+                 cy.url().should('include', '/dashboard/index');
+            for(let i=0;i<employees.length;i++){
                 const {firstName ,middleName , lastName } = employees[i];
                 const empName = `${firstName} ${middleName} ${lastName}`;
-                 cy.loginToOrangeHRM('Admin' , 'admin123');
-                 cy.url().should('include', '/dashboard/index');
+                 
                     sharedactions.clickOnLeaveMenuItem();
                     leaveListAction.clickOnLeaveListLinkInNavBar()
                                    .typeInEmployeeName(empName)
                                    .selectEmployeeName(empName)
                                    .clickOnSearchButton()
-                                   .clickOnApplyButton();
+                                   .clickOnApproveButton();
 
             }
-            
-    })
+          cy.logout();
+    });
 
    after(()=>{
     cy.loginToOrangeHRM('Admin', 'admin123');

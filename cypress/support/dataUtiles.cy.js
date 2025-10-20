@@ -21,14 +21,14 @@ class dataUtiles{
     }
 
     addLoginDetails(data={}){
-        return cy.then(()=>{
+        // return cy.then(()=>{
             return employeeApi.addLoginDetails(
                     data
         )
         .then((response)=>{
             return response.body.data;
         })
-        })
+        // })
         
     }
 
@@ -37,11 +37,11 @@ class dataUtiles{
     }
 
     addLeaveEntitlemet(data={}){
-        return cy.then(()=>{
+        // return cy.then(()=>{
             return entitlementApi.addLeaveEntitlement(
                 entitlementFactory.addLeaveEntitlemet(data)
             );
-        })
+        // })
     }
 
 }

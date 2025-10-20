@@ -1,12 +1,12 @@
 class loginActions{
 
     typeInUserName(name){
-        cy.get('input[placeholder="Username"]').clear().type(name);
+        cy.get('input[placeholder="username"]').clear().type(name);
         return this;
     }
 
     typeInPassword(password){
-        cy.get('input[placeholder="Password"]').clear().type(password);
+        cy.get('input[placeholder="password"]').clear().type(password);
         return this;
     }
     clickOnLoginButton(){

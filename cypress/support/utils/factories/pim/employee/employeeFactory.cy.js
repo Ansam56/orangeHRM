@@ -14,9 +14,14 @@ export class employeeFactory{
     }
 
     static addLoginDetails({empNumber,password,status,userRoleId,username}={}){
+        const  generatePassword =()=> {
+            let pass = faker.internet.password({length:10 , mix_case: true});
+            pass +=faker.number.int({min:0 , max:9});
+            return pass;
+        }
         return{
             empNumber :empNumber,
-            password : password || faker.internet.password({length: 10 , pattern: /[A-Z][a-z]{1,}[0-9]{1,}]/ }),
+            password : password || generatePassword(),
             status : true ,
             userRoleId :2,
             username : username || faker.internet.username()
