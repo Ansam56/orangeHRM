@@ -62,9 +62,11 @@ describe('Check Add a New Employee Functionality without adding a login details'
     describe.only('Check Adding Employee with existing Id', () => {
         let employee=[];
         beforeEach('',()=>{
-            employee= datautiles.addEmployee({firstName:'ahmad', lastName:'ahmad',employeeId:`${employeeId}`})
+             datautiles.addEmployee({firstName:'ahmad', lastName:'ahmad',employeeId:`${employeeId}`})
+                       .then((response)=>{
+                        employee=response;
+                       })
             
-            console.log(employee);
         });
         it("validate that the admin can't able to add new employee with existing employee id and valid first name , last name" , ()=>{
         
