@@ -37,8 +37,9 @@ describe("Check Adding Claims Functionality", () => {
         cy.logout();
       });
 
-    // console.log("users : ", users);
-    // console.log("loginDetails : ", loginDetails);
+    console.log("users : ", users);
+    console.log("employees : ", employees);
+    console.log("loginDetails : ", loginDetails);
   });
 
   claimsData.forEach((claim) => {
@@ -54,5 +55,13 @@ describe("Check Adding Claims Functionality", () => {
 
   after(() => {
     addClaimsAssertion.verifyClaimsSubmittedSuccessfully();
+    cy.logout();
+    cy.loginToOrangeHRM("Admin", "admin123");
+    addClaimsAction.clickOnClaimMenuItem();
+    addClaimsAction.typeInEmployeeNameField(
+      employees[0].firstName + " " + employees[0].lastName
+    );
+    addClaimsAction.clickSearchButton();
+    addClaimsAssertion.verifyClaimsAppearsInAdmin();
   });
 });

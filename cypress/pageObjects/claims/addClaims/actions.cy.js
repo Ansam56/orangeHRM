@@ -44,4 +44,16 @@ export default class addClaimsActions {
     cy.get(".oxd-textarea").last().type(expense.note);
     cy.get('button[type="submit"]').click();
   }
+
+  typeInEmployeeNameField(employeeName) {
+    cy.get(".oxd-autocomplete-text-input")
+      .eq(0)
+      .type(employeeName + "{enter}");
+    return this;
+  }
+
+  clickSearchButton() {
+    cy.contains('button[type="submit"]', "Search").click();
+    return this;
+  }
 }
