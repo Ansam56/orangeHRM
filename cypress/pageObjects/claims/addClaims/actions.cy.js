@@ -45,6 +45,11 @@ export default class addClaimsActions {
     cy.get('button[type="submit"]').click();
   }
 
+  clickOnSubmitButton() {
+    cy.contains('button[type="button"]', "Submit").click();
+    return this;
+  }
+
   typeInEmployeeNameField(employeeName) {
     cy.get(".oxd-autocomplete-text-input")
       .eq(0)

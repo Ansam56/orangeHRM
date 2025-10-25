@@ -20,9 +20,9 @@ export default class addClaimsAssertions {
         total += +expense.amount;
         // const parts = expense.date.split("-");
         // const formattedDate = `${parts[1]}-${parts[2]}-${parts[0]}`;
-        const parts = expense.date.split("-");
-        const formattedDate = `${parts[0]}-${parts[2]}-${parts[1]}`;
-        cy.get(".oxd-table-card").should("contain", formattedDate);
+        // const parts = expense.date.split("-");
+        // const formattedDate = `${parts[0]}-${parts[2]}-${parts[1]}`;
+        cy.get(".oxd-table-card").should("contain", expense.date);
         cy.get(".oxd-table-card").should("contain", expense.note);
       });
       cy.get(".orangehrm-bottom-container p").should(
@@ -47,9 +47,9 @@ export default class addClaimsAssertions {
         cy.get(".oxd-table-card").should("contain", expense.expensesType);
         cy.get(".oxd-table-card").should("contain", expense.amount + ".00");
         //total += +expense.amount;
-        const parts = expense.date.split("-");
-        const formattedDate = `${parts[0]}-${parts[2]}-${parts[1]}`;
-        cy.get(".oxd-table-card").should("contain", formattedDate);
+        // const parts = expense.date.split("-");
+        // const formattedDate = `${parts[0]}-${parts[2]}-${parts[1]}`;
+        cy.get(".oxd-table-card").should("contain", expense.date);
         cy.get(".oxd-table-card").should("contain", expense.note);
       });
       cy.go("back");

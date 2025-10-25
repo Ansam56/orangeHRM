@@ -50,6 +50,8 @@ describe("Check Adding Claims Functionality", () => {
         .clickOnClaimMenuItem()
         .clickOnSubmitClaimLink()
         .submitClaimsForm(claim);
+
+      addClaimsAction.clickOnSubmitButton();
     });
   });
 
