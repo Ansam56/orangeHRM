@@ -51,9 +51,8 @@ export default class addClaimsActions {
   }
 
   typeInEmployeeNameField(employeeName) {
-    cy.get(".oxd-autocomplete-text-input")
-      .eq(0)
-      .type(employeeName + "{enter}");
+    cy.get(".oxd-autocomplete-text-input").eq(0).type(employeeName);
+    cy.contains(".oxd-autocomplete-dropdown", employeeName).click();
     return this;
   }
 

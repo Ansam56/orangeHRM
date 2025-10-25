@@ -34,6 +34,8 @@ describe("Check Adding Claims Functionality", () => {
         });
       })
       .then(() => {
+        cy.writeFile("cypress/fixtures/employees.json", employees);
+        cy.writeFile("cypress/fixtures/loginDetails.json", loginDetails);
         cy.logout();
       });
 
@@ -61,7 +63,11 @@ describe("Check Adding Claims Functionality", () => {
     cy.loginToOrangeHRM("Admin", "admin123");
     addClaimsAction.clickOnClaimMenuItem();
     addClaimsAction.typeInEmployeeNameField(
-      employees[0].firstName + " " + employees[0].lastName
+      employees[0].firstName +
+        " " +
+        employees[0].middleName +
+        " " +
+        employees[0].lastName
     );
     addClaimsAction.clickSearchButton();
     addClaimsAssertion.verifyClaimsAppearsInAdmin();
