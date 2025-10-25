@@ -24,6 +24,7 @@ export default class addClaimsAssertions {
         // const formattedDate = `${parts[0]}-${parts[2]}-${parts[1]}`;
         cy.get(".oxd-table-card").should("contain", expense.date);
         cy.get(".oxd-table-card").should("contain", expense.note);
+        //cy.wait("1000")
       });
       cy.get(".orangehrm-bottom-container p").should(
         "contain",

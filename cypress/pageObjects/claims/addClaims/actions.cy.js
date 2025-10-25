@@ -47,6 +47,7 @@ export default class addClaimsActions {
 
   clickOnSubmitButton() {
     cy.contains('button[type="button"]', "Submit").click();
+    //cy.wait("1000")
     return this;
   }
 

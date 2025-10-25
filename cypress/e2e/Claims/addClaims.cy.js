@@ -69,6 +69,8 @@ describe("Check Adding Claims Functionality", () => {
         " " +
         employees[0].lastName
     );
+    //    addClaimsAction.clickSearchButton();
+
     addClaimsAction.clickSearchButton();
     addClaimsAssertion.verifyClaimsAppearsInAdmin();
   });

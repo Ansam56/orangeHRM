@@ -35,5 +35,6 @@ export default class manageClaimsActions {
   clickSearchButton() {
     cy.contains('button[type="submit"]', "Search").click();
     return this;
+    //cy.wait("1000")
   }
 }

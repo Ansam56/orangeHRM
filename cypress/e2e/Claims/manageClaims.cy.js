@@ -45,6 +45,8 @@ describe("Check Manage Claims Functionality", () => {
     manageClaimsAssertion.verifyClaimsManagedSuccessfully();
     cy.logout();
     cy.loginToOrangeHRM(loginDetails[0].username, loginDetails[0].password);
+    //    manageClaimsAction.clickOnClaimMenuItem();
+
     manageClaimsAction.clickOnClaimMenuItem();
     manageClaimsAssertion.verifyClaimsManagedSuccessfully();
   });
