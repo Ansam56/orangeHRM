@@ -57,7 +57,8 @@ describe("Check Adding Claims Functionality", () => {
     });
   });
 
-  after(() => {
+  it("verify claims submitted successfully in employee side and admin side", () => {
+    cy.loginToOrangeHRM(loginDetails[0].username, loginDetails[0].password);
     addClaimsAssertion.verifyClaimsSubmittedSuccessfully();
     cy.logout();
     cy.loginToOrangeHRM("Admin", "admin123");

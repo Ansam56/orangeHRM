@@ -6,10 +6,10 @@ export default class manageClaimsActions {
       cy.get(".oxd-table-cell-action-space")
         .eq(claimsData.length - index - 1)
         .click();
-
-      cy.get(".oxd-button")
-        .eq(claimsData.length - index - 1)
-        .click();
+      const status = ["Approve", "Reject", "Back"];
+      cy.contains(status[index]).click();
+      // cy.get(".oxd-button").click();
+      //.eq(claimsData.length - index - 1)
 
       cy.go("back");
     });

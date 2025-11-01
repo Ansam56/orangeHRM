@@ -6,19 +6,19 @@
     "expenses": [
       {
         "expensesType": "Accommodation",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "150",
         "note": "Hotel costs"
       },
       {
         "expensesType": "Fuel Allowance",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "200",
         "note": "Fuel costs"
       },
       {
         "expensesType": "Transport",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "75",
         "note": "Taxi fares"
       }
@@ -31,19 +31,19 @@
     "expenses": [
       {
         "expensesType": "Planned Surgery",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "300",
         "note": "Doctor's fees"
       },
       {
         "expensesType": "Fuel Allowance",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "200",
         "note": "Fuel costs"
       },
       {
         "expensesType": "Transport",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "75",
         "note": "Taxi fares"
       }
@@ -56,19 +56,19 @@
     "expenses": [
       {
         "expensesType": "Transport",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "500",
         "note": "Flight and accommodation"
       },
       {
         "expensesType": "Fuel Allowance",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "200",
         "note": "Fuel costs"
       },
       {
         "expensesType": "Accommodation",
-        "date": "2025-31-10",
+        "date": "2025-28-11",
         "amount": "75",
         "note": "Hotel costs"
       }

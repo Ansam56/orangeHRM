@@ -4,7 +4,7 @@ export default class addClaimsAssertions {
   verifyClaimsSubmittedSuccessfully() {
     claimsData.forEach((claim, index = 0) => {
       //cy.wait("3000");
-      cy.contains("a", "My Claims").click();
+      cy.contains("a", "Claim").click();
 
       cy.get(".oxd-table-card").should("contain", claim.event);
       cy.get(".oxd-table-card").should("contain", claim.currency);

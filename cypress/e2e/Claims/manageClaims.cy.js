@@ -2,7 +2,9 @@
 
 import manageClaimsActions from "../../pageObjects/claims/manageClaims/actions.cy.js";
 import manageClaimsAssertions from "../../pageObjects/claims/manageClaims/assertions.cy.js";
+import dataUtiles from "../../support/dataUtiles.cy.js";
 
+const datautiles = new dataUtiles();
 const manageClaimsAction = new manageClaimsActions();
 const manageClaimsAssertion = new manageClaimsAssertions();
 
@@ -49,5 +51,15 @@ describe("Check Manage Claims Functionality", () => {
 
     manageClaimsAction.clickOnClaimMenuItem();
     manageClaimsAssertion.verifyClaimsManagedSuccessfully();
+  });
+
+  after(() => {
+    cy.logout();
+    cy.loginToOrangeHRM("Admin", "admin123");
+    console.log(employees);
+    const empIds = loginDetails.map((emp) => {
+      return parseInt(emp.empNumber);
+    });
+    return datautiles.deleteEmployees(empIds);
   });
 });
