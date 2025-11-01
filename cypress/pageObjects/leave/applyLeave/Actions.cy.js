@@ -27,8 +27,19 @@ export default class applyLeaveActions {
 
     return this;
   }
+  // selectToday() {
+  //   cy.get(".--today").first().click();
+  //   return this;
+  // }
+
   selectToday() {
-    cy.get(".--today").first().click();
+    if (today.getDay() == 0) {
+      cy.get(".--today").first().parent().next().click();
+    } else if (today.getDay() == 6) {
+      cy.get(".--today").first().parent().next().next().click();
+    } else {
+      cy.get(".--today").first().click();
+    }
     return this;
   }
 
