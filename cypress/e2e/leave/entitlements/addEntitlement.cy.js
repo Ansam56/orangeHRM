@@ -13,19 +13,18 @@ const addEntitlementsactions = new addEntitlementsActions();
 
 const entitlementactions = new entitlementActions();
 const entitlementassertions = new entitlementAssertions();
-//const leaveType = "CAN - Vacation";
-//const leaveType = "CAN - Matternity";
-const leaveType = "CAN - Personal";
-const leaveDays = "14";
+
 describe("Check Adding Leave Entitlement Functionality", () => {
   let employees = [];
   let loginDetails = [];
   let users = [];
-
+  let leavesTypes = [];
+  let leaveType;
+  const leaveDays = "14";
   before(() => {
     cy.loginToOrangeHRM("Admin", "admin123");
 
-    datautiles.addEmployee({}, 5).then((emps) => {
+    datautiles.addEmployee({}, 3).then((emps) => {
       employees = emps;
 
       employees.forEach((emp) => {
@@ -45,20 +44,27 @@ describe("Check Adding Leave Entitlement Functionality", () => {
 
   it("validate that the admin can add leave entitlement for a number of employees", () => {
     for (let i = 0; i < employees.length; i++) {
-      sharedactions
-        .clickOnLeaveMenuItem()
-        .clickOnEntitlementsLinkInNavbar()
-        .clickOnAddEntitlementsLink();
-      const { firstName, middleName, lastName } = employees[i];
-      const empName = `${firstName} ${middleName} ${lastName}`;
+      datautiles.addLeaveType();
+      datautiles.getRandomLeaveType().then((leave) => {
+        leaveType = leave.name;
+        leavesTypes.push(leaveType);
+      });
+      cy.then(() => {
+        sharedactions
+          .clickOnLeaveMenuItem()
+          .clickOnEntitlementsLinkInNavbar()
+          .clickOnAddEntitlementsLink();
+        const { firstName, middleName, lastName } = employees[i];
+        const empName = `${firstName} ${middleName} ${lastName}`;
 
-      addEntitlementsactions
-        .typeInEmployeeNameInput(empName)
-        .SelectFirstOptionOfSearchResultForEmployeeName(empName)
-        .selectLeaveType(leaveType)
-        .typeInEntitlementInput(leaveDays)
-        .clickOnSaveButton()
-        .clickOnConfirmButton();
+        addEntitlementsactions
+          .typeInEmployeeNameInput(empName)
+          .SelectFirstOptionOfSearchResultForEmployeeName(empName)
+          .selectLeaveType(leaveType)
+          .typeInEntitlementInput(leaveDays)
+          .clickOnSaveButton()
+          .clickOnConfirmButton();
+      });
     }
     cy.logout();
   });
@@ -70,7 +76,7 @@ describe("Check Adding Leave Entitlement Functionality", () => {
       sharedactions.clickOnLeaveMenuItem().clickOnEntitlementsLinkInNavbar();
       entitlementactions.clickOnMyEntitlementOption();
       entitlementassertions
-        .verifyThatLeaveTypeIsAppeare(leaveType)
+        .verifyThatLeaveTypeIsAppeare(leavesTypes[i])
         .verifyThatLeaveDaysIsAppeare(leaveDays);
 
       cy.logout();
