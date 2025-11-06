@@ -29,8 +29,11 @@ jobs:
         with:
           browser: chrome
           record: false
-          spec: "cypress/e2e/**/*.cy.js" # Run all tests
-          excludeSpecPattern: "cypress/e2e/accessibility/**" # Exclude accessibility folder
+          spec: |
+            cypress/e2e/**/*.cy.js
+            !cypress/e2e/accessibility/**/*.cy.js
+          # spec: "cypress/e2e/**/*.cy.js" # Run all tests
+          # excludeSpecPattern: "cypress/e2e/accessibility/**" # Exclude accessibility folder
 
       - name: Upload Cypress videos/screenshots
         if: failure()
