@@ -29,10 +29,8 @@ jobs:
         with:
           browser: chrome
           record: false
-
-          excludeSpecPattern: |
-            cypress/e2e/loginForAccessibilityTesting.cy.js
-            cypress/e2e/runPagesForAccessibilityTesting.cy.js
+          spec: "cypress/e2e/**/*.cy.js" # Run all tests
+          excludeSpecPattern: "cypress/e2e/accessibility/**" # Exclude accessibility folder
 
       - name: Upload Cypress videos/screenshots
         if: failure()
@@ -43,7 +41,6 @@ jobs:
             cypress/screenshots
             cypress/videos
 
-  # Accessibility Testing
   accessibility-tests:
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -64,6 +61,4 @@ jobs:
         with:
           browser: chrome
           record: false
-          spec: |
-            cypress/e2e/loginForAccessibilityTesting.cy.js
-            cypress/e2e/runPagesForAccessibilityTesting.cy.js
+          spec: "cypress/e2e/accessibility/**/*.cy.js" # Only run accessibility tests
