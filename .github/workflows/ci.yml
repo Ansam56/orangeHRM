@@ -29,8 +29,7 @@ jobs:
         with:
           browser: chrome
           record: false
-          spec: |
-            cypress/e2e/**/*.cy.js
+
           excludeSpecPattern: |
             cypress/e2e/loginForAccessibilityTesting.cy.js
             cypress/e2e/runPagesForAccessibilityTesting.cy.js
