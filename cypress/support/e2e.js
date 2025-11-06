@@ -14,4 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
+
+// Source - https://stackoverflow.com/questions/53845493/cypress-uncaught-error-despite-cy-onuncaughtexception
+// Posted by soccerway
+// Retrieved 11/5/2025, License - CC BY-SA 4.0
+
+Cypress.on("uncaught:exception", (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false;
+});

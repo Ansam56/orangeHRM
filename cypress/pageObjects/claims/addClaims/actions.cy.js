@@ -24,7 +24,6 @@ export default class addClaimsActions {
     claim.expenses.forEach((expense) => {
       this.submitExpensesForm(expense);
     });
-    //cy.wait(3000);
     return this;
   }
 
@@ -47,7 +46,6 @@ export default class addClaimsActions {
 
   clickOnSubmitButton() {
     cy.contains('button[type="button"]', "Submit").click();
-    //cy.wait("1000")
     return this;
   }
 

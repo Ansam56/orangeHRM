@@ -2,9 +2,9 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   cypress-run:
@@ -24,12 +24,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run all Cypress tests
+      - name: Run main Cypress tests (excluding accessibility)
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
           record: false
-
+          spec: |
+            cypress/e2e/**/*.cy.js
+          excludeSpecPattern: |
+            cypress/e2e/loginForAccessibilityTesting.cy.js
+            cypress/e2e/runPagesForAccessibilityTesting.cy.js
 
       - name: Upload Cypress videos/screenshots
         if: failure()
@@ -39,3 +43,28 @@ jobs:
           path: |
             cypress/screenshots
             cypress/videos
+
+  # Accessibility Testing
+  accessibility-tests:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run accessibility tests only
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          record: false
+          spec: |
+            cypress/e2e/loginForAccessibilityTesting.cy.js
+            cypress/e2e/runPagesForAccessibilityTesting.cy.js

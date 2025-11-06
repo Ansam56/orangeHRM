@@ -44,7 +44,7 @@ describe("Check Adding Claims Functionality", () => {
     console.log("loginDetails : ", loginDetails);
   });
 
-  claimsData.forEach((claim) => {
+  claimsData.forEach((claim, index = 0) => {
     it(`validate that the user can add ${claim.event} claim with ${claim.currency} currency `, () => {
       cy.loginToOrangeHRM(loginDetails[0].username, loginDetails[0].password);
 
@@ -54,25 +54,21 @@ describe("Check Adding Claims Functionality", () => {
         .submitClaimsForm(claim);
 
       addClaimsAction.clickOnSubmitButton();
+
+      addClaimsAssertion.verifyClaimsSubmittedSuccessfully(claim);
+      cy.logout();
+      cy.loginToOrangeHRM("Admin", "admin123");
+      addClaimsAction.clickOnClaimMenuItem();
+      addClaimsAction.typeInEmployeeNameField(
+        employees[0].firstName +
+          " " +
+          employees[0].middleName +
+          " " +
+          employees[0].lastName
+      );
+
+      addClaimsAction.clickSearchButton();
+      addClaimsAssertion.verifyClaimsAppearsInAdmin(claim);
     });
-  });
-
-  it("verify claims submitted successfully in employee side and admin side", () => {
-    cy.loginToOrangeHRM(loginDetails[0].username, loginDetails[0].password);
-    addClaimsAssertion.verifyClaimsSubmittedSuccessfully();
-    cy.logout();
-    cy.loginToOrangeHRM("Admin", "admin123");
-    addClaimsAction.clickOnClaimMenuItem();
-    addClaimsAction.typeInEmployeeNameField(
-      employees[0].firstName +
-        " " +
-        employees[0].middleName +
-        " " +
-        employees[0].lastName
-    );
-    //    addClaimsAction.clickSearchButton();
-
-    addClaimsAction.clickSearchButton();
-    addClaimsAssertion.verifyClaimsAppearsInAdmin();
   });
 });
