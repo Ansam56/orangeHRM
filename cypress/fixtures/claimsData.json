@@ -1,0 +1,77 @@
+[
+  {
+    "event": "Accommodation",
+    "currency": "Jordanian Dinar",
+    "remarks": "My visit to Amman",
+    "expenses": [
+      {
+        "expensesType": "Accommodation",
+        "date": "2025-28-11",
+        "amount": "150",
+        "note": "Hotel costs"
+      },
+      {
+        "expensesType": "Fuel Allowance",
+        "date": "2025-28-11",
+        "amount": "200",
+        "note": "Fuel costs"
+      },
+      {
+        "expensesType": "Transport",
+        "date": "2025-28-11",
+        "amount": "75",
+        "note": "Taxi fares"
+      }
+    ]
+  },
+  {
+    "event": "Medical Reimbursement",
+    "currency": "Turkish Lira",
+    "remarks": "Health checkup",
+    "expenses": [
+      {
+        "expensesType": "Planned Surgery",
+        "date": "2025-28-11",
+        "amount": "300",
+        "note": "Doctor's fees"
+      },
+      {
+        "expensesType": "Fuel Allowance",
+        "date": "2025-28-11",
+        "amount": "200",
+        "note": "Fuel costs"
+      },
+      {
+        "expensesType": "Transport",
+        "date": "2025-28-11",
+        "amount": "75",
+        "note": "Taxi fares"
+      }
+    ]
+  },
+  {
+    "event": "Travel Allowance",
+    "currency": "United States Dollar",
+    "remarks": "Business trip to New York",
+    "expenses": [
+      {
+        "expensesType": "Transport",
+        "date": "2025-28-11",
+        "amount": "500",
+        "note": "Flight and accommodation"
+      },
+      {
+        "expensesType": "Fuel Allowance",
+        "date": "2025-28-11",
+        "amount": "200",
+        "note": "Fuel costs"
+      },
+      {
+        "expensesType": "Accommodation",
+        "date": "2025-28-11",
+        "amount": "75",
+        "note": "Hotel costs"
+      }
+    ]
+  }
+]
