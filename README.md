@@ -21,6 +21,8 @@ The framework follows a clean Page Object Model (POM) architecture and leverages
 * Add Entitlements (UI+API)
 * Logout from OrangeHRM
 * Accessibility Testing For Some Pages
+* Add full CI/CD integration with GitHub Actions
+* Implement data generation using the Faker plugin
 
 ---
 
@@ -39,11 +41,7 @@ The framework follows a clean Page Object Model (POM) architecture and leverages
    npx cypress open
    ```
    
----   
 
-## Future Improvements
-* Add full CI/CD integration with GitHub Actions
-* Implement data generation using the Faker plugin
 
 
 
